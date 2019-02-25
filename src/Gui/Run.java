@@ -17,12 +17,12 @@ import Database.DBConnection;
  *
  * @author user
  */
-public class JavaFXMLEx1 extends Application {
+public class Run extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
         
-        Parent root = FXMLLoader.load(getClass().getResource("FXML.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("FXML_Login.fxml"));
         
         Scene scene = new Scene(root);
         

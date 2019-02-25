@@ -13,20 +13,23 @@ package Controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import Database.DBManager;
-import Model.User;
+import Model.Fornitore;
+
  
 import java.sql.ResultSet;
 import java.sql.SQLException;
  
-public class UserDAO {
+public class FornitoriDAO {
  
-     public static boolean ValidateUser (User _user ) throws SQLException, ClassNotFoundException {
+     public static boolean ValidateFornitore (Fornitore _fo ) throws SQLException, ClassNotFoundException {
         boolean _checked=false;
 
+ 
+        
         //Declare a SELECT statement
-        String selectStmt = "SELECT * FROM tblutenti "
-            +" WHERE UserName ='" + _user.getFirstName() 
-            +"' and Password ='" + _user.getPassword() +"'" ;
+        String selectStmt = "SELECT * FROM tblfornitori "
+            +" WHERE NomeFornitore ='" + _fo.getNomeFornitore()
+             + "'" ;
  
         //Execute SELECT statement
         try {
@@ -36,31 +39,43 @@ public class UserDAO {
             
         } catch (SQLException e) {
             System.out.println("While searching an employee with "
-                +  _user.getFirstName() + " id, an error occurred: " + _user.getPassword());
+                +  _fo.getNomeFornitore() + " id, an error occurred: " + _fo.getIDFornitore());
             //Return exception
             throw e;
         }
         return _checked;
     }
     
-    
-    
-    
+    /*
+           SELECT `tblfornitori`.`IDFornitore`,
+    `tblfornitori`.`NomeFornitore`,
+    `tblfornitori`.`Indirizzo`,
+    `tblfornitori`.`Citta`,
+    `tblfornitori`.`Prov`,
+    `tblfornitori`.`Cap`,
+    `tblfornitori`.`CodFisc`,
+    `tblfornitori`.`PIVA`,
+    `tblfornitori`.`Email`,
+    `tblfornitori`.`Telefono`
+    FROM `db_pulizie`.`tblfornitori`;
+    */
  
     //Use ResultSet from DB as parameter and set Employee Object's attributes and return employee object.
-    private static User getUserFromResultSet(ResultSet rs) throws SQLException
+    private static Fornitore getFornitoreFromResultSet(ResultSet rs) throws SQLException
     {
-        User _user = null;
+        Fornitore _fo = null;
         if (rs.next()) {
-            _user = new User();
-            _user.setUserIdProperty(rs.getInt("IDUtente"));
-            _user.setFirstName(rs.getString("UserName"));
-            _user.setLastName(rs.getString("Password"));
+            _fo = new Fornitore();
+            _fo.setIDFornitore(rs.getInt("IDFornitore"));
+            _fo.setNomeFornitore(rs.getString("NomeFornitore"));
+            _fo.setIndirizzo(rs.getString("Indirizzo"));
+            _fo.setCitta(rs.getString("Citta"));
+            
             //_user.setEmail(rs.getString("EMAIL"));
             //_user.setLastLogin(rs.getDate("PHONE_NUMBER"));
             
         }
-        return _user;
+        return _fo;
     }
     
     //*******************************

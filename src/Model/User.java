@@ -37,6 +37,7 @@ public class User {
         this._first_name = new SimpleStringProperty();
         this._last_name = new SimpleStringProperty();
         this._email = new SimpleStringProperty();
+        this._password =new SimpleStringProperty();
         //da sostituire con data corrente 
         this._lastLogin =  new SimpleObjectProperty<LocalDate>(LocalDate.now());
     }

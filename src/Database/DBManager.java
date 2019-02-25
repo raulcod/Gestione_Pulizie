@@ -62,6 +62,36 @@ public class DBManager {
         }
     }
  
+    public static boolean dbExecute(String queryStmt) throws SQLException, ClassNotFoundException {
+        //Declare statement, resultSet and CachedResultSet as null
+        Statement stmt = null;
+        boolean _executed=false;
+        
+        try {
+            //Connect to DB (Establish Oracle Connection)
+            dbConnect();
+            System.out.println("Select statement: " + queryStmt + "\n");
+             //Create statement
+            stmt = conn.createStatement();
+             //Execute select (query) operation
+            _executed = stmt.execute(queryStmt);
+
+        } catch (SQLException e) {
+            System.out.println("Problem occurred at executeQuery operation : " + e);
+            throw e;
+        } finally {
+            
+            if (stmt != null) {
+                //Close Statement
+                stmt.close();
+            }
+            //Close connection
+            dbDisconnect();
+        }
+       
+        return _executed;
+    }
+    
     //DB Execute Query Operation
     public static ResultSet dbExecuteQuery(String queryStmt) throws SQLException, ClassNotFoundException {
         //Declare statement, resultSet and CachedResultSet as null

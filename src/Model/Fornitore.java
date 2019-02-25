@@ -18,7 +18,7 @@ import javafx.beans.property.StringProperty;
  *
  * @author Marco Jakob
  */
-public class Fornitori {
+public class Fornitore {
 
     private final IntegerProperty IDFornitore;
     private final StringProperty NomeFornitore;
@@ -36,7 +36,7 @@ public class Fornitori {
      * Default constructor.
      */
     
-    public Fornitori() {
+    public Fornitore() {
         this(null,null,null,null,null,null,null,null,null,null);
     }
     
@@ -46,7 +46,7 @@ public class Fornitori {
      * @param firstName
      * @param lastName
      */
-    public Fornitori(Integer IDFornitore,String NomeFornitore, String Indirizzo,String Citta,
+    public Fornitore(Integer IDFornitore,String NomeFornitore, String Indirizzo,String Citta,
     String Prov,String Cap,String CodFisc,String PIVA, String Email,String Telefono) {
         this.IDFornitore = new SimpleIntegerProperty(IDFornitore);
         this.NomeFornitore = new SimpleStringProperty(NomeFornitore);
