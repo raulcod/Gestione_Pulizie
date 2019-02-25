@@ -5,7 +5,7 @@
  */
 package Gui;
 
-import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.Driver;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

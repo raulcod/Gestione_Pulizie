@@ -70,6 +70,13 @@ public class FornitoriDAO {
             _fo.setNomeFornitore(rs.getString("NomeFornitore"));
             _fo.setIndirizzo(rs.getString("Indirizzo"));
             _fo.setCitta(rs.getString("Citta"));
+            _fo.setProv(rs.getString("Prov"));
+            _fo.setCap(rs.getString("Cap"));
+            _fo.setCodFisc(rs.getString("CodFisc"));
+            _fo.setPIVA(rs.getString("PIVA"));
+            _fo.setEmail(rs.getString("Email"));
+            _fo.setTelefono(rs.getString("Telefono"));
+            
             
             //_user.setEmail(rs.getString("EMAIL"));
             //_user.setLastLogin(rs.getDate("PHONE_NUMBER"));
@@ -81,22 +88,22 @@ public class FornitoriDAO {
     //*******************************
     //SELECT an Employee
     //*******************************
-    public static User searchUser (String usrId) throws SQLException, ClassNotFoundException {
+    public static Fornitore searchFornitore (String _foId) throws SQLException, ClassNotFoundException {
         //Declare a SELECT statement
-        String selectStmt = "SELECT * FROM tblutenti WHERE IDUtente="+usrId;
+        String selectStmt = "SELECT * FROM tblutenti WHERE IDUtente="+_foId;
  
         //Execute SELECT statement
         try {
             //Get ResultSet from dbExecuteQuery method
-            ResultSet rsUser = DBManager.dbExecuteQuery(selectStmt);
+            ResultSet rsFornitore = DBManager.dbExecuteQuery(selectStmt);
  
             //Send ResultSet to the getEmployeeFromResultSet method and get employee object
-            User _user = getUserFromResultSet(rsUser);
+            Fornitore _user = getFornitoreFromResultSet(rsFornitore);
  
             //Return employee object
             return _user;
         } catch (SQLException e) {
-            System.out.println("While searching an employee with " + usrId + " id, an error occurred: " + e);
+            System.out.println("While searching an employee with " + _foId + " id, an error occurred: " + e);
             //Return exception
             throw e;
         }
@@ -104,17 +111,22 @@ public class FornitoriDAO {
  
     
      //Select * from employees operation
-    private static ObservableList<User> getUserList(ResultSet rs) throws SQLException, ClassNotFoundException {
+    private static ObservableList<Fornitore> getFornitoreList(ResultSet rs) throws SQLException, ClassNotFoundException {
         //Declare a observable List which comprises of Employee objects
-        ObservableList<User> userList = FXCollections.observableArrayList();
+        ObservableList<Fornitore> fornitoreList = FXCollections.observableArrayList();
  
         while (rs.next()) {
-            User usr = new User();
-            usr.setUserIdProperty(rs.getInt("IDUtente"));
-            usr.setFirstName(rs.getString("FIRST_NAME"));
-            usr.setLastName(rs.getString("FIRST_NAME"));
-            usr.setPassword(rs.getString("Password"));
-            usr.setEmail(rs.getString("Email"));
+            Fornitore _fo = new Fornitore();
+           _fo.setIDFornitore(rs.getInt("IDFornitore"));
+            _fo.setNomeFornitore(rs.getString("NomeFornitore"));
+            _fo.setIndirizzo(rs.getString("Indirizzo"));
+            _fo.setCitta(rs.getString("Citta"));
+            _fo.setProv(rs.getString("Prov"));
+            _fo.setCap(rs.getString("Cap"));
+            _fo.setCodFisc(rs.getString("CodFisc"));
+            _fo.setPIVA(rs.getString("PIVA"));
+            _fo.setEmail(rs.getString("Email"));
+            _fo.setTelefono(rs.getString("Telefono"));
             
             //emp.setFirstName(rs.getString("FIRST_NAME"));
             //emp.setLastName(rs.getString("LAST_NAME"));
@@ -127,10 +139,10 @@ public class FornitoriDAO {
             //emp.setManagerId(rs.getInt("MANAGER_ID"));
             //emp.setDepartmantId(rs.getInt("DEPARTMENT_ID"));
             //Add employee to the ObservableList
-            userList.add(usr);
+            fornitoreList.add(_fo);
         }
         //return empList (ObservableList of Employees)
-        return userList;
+        return fornitoreList;
     }
  
     
@@ -139,17 +151,17 @@ public class FornitoriDAO {
     //*******************************
     //SELECT Employees
     //*******************************
-    public static ObservableList<User> searchUser () throws SQLException, ClassNotFoundException {
+    public static ObservableList<Fornitore> searchFornitore () throws SQLException, ClassNotFoundException {
         //Declare a SELECT statement
         String selectStmt = "SELECT * FROM tblUtenti";
  
         //Execute SELECT statement
         try {
             //Get ResultSet from dbExecuteQuery method
-            ResultSet rsUser = DBManager.dbExecuteQuery(selectStmt);
+            ResultSet rsFornitore = DBManager.dbExecuteQuery(selectStmt);
  
             //Send ResultSet to the getEmployeeList method and get employee object
-            ObservableList<User> empList = getUserList(rsUser);
+            ObservableList<Fornitore> empList = getFornitoreList(rsFornitore);
  
             //Return employee object
             return empList;
